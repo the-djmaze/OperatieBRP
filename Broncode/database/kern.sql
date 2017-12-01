@@ -2,10 +2,15 @@
  * Read before you start: https://qntm.org/support
  *
  * The big difference:
+ *   A person is not always a human, therefore you will find "human" in this schema.
+ *   Hey: https://www.youtube.com/watch?v=L3wKzyIN1yk
+ *
  *   Everything has a prefix and '_' instead of CamelCase.
- *   The prefixes are there so you can easily create, read and understand relations.
+ *
+ *   The prefixes are there so you can easily create, read, join and understand relations.
+ *
  *   CamelCase in databases is BAD practice, this is not your fault.
- *   Read as example: https://dev.mysql.com/doc/refman/5.7/en/identifier-case-sensitivity.html
+ *   Read: https://dev.mysql.com/doc/refman/5.7/en/identifier-case-sensitivity.html
  */
 
 CREATE TABLE genders
