@@ -1,6 +1,11 @@
 /**
- * The bad part:
- *     https://qntm.org/support
+ * Read before you start: https://qntm.org/support
+ *
+ * The big difference:
+ *   Everything has a prefix and '_' instead of CamelCase.
+ *   The prefixes are there so you can easily create, read and understand relations.
+ *   CamelCase in databases is BAD practice, this is not your fault.
+ *   Read as example: https://dev.mysql.com/doc/refman/5.7/en/identifier-case-sensitivity.html
  */
 
 CREATE TABLE genders
@@ -34,7 +39,7 @@ INSERT INTO document_types VALUES
 
 CREATE TABLE documents (
 	document_id          SERIAL NOT NULL,
-	document_type        SMALLINT NOT NULL,
+	document_type_id     INTEGER NOT NULL,
 	country_code         SMALLINT NOT NULL COMMENT 'ISO 3166-1 number',
 	document_code        VARCHAR(2) NOT NULL,
 	document_description VARCHAR(250) NOT NULL,
@@ -126,7 +131,7 @@ CREATE TABLE humans_status_history
 	human_status_verified TINYINT NOT NULL COMMENT 'when 0 it is not officialy verified',
 	human_status_ts       TIMESTAMP NOT NULL COMMENT 'Date and time of entry',
 
-	PRIMARY KEY (human_id, human_status_id)
+	KEY (human_id, human_status_id)
 );
 
 
