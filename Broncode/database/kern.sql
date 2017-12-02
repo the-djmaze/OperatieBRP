@@ -172,3 +172,39 @@ CREATE TABLE humans_documents (
    CONSTRAINT pk_His_PersReisdoc PRIMARY KEY (ID)
 */
 );
+
+/**
+ * Relations, Correlations or Relationships?
+ * The entries may be multiple, for example a human changed from man to woman.
+ * The human wants to be recognized as the mother, but one of the children
+ * prefers to keep the human as father.
+ * The correspondation to the human should say woman.
+ * The correspondation to the child should say father or just NOT mention it.
+ * Example:
+ *    [ 1 | 2 | 1 | 19900101 | 19940101 ] father
+ *    [ 1 | 2 | 2 | 19940101 |        0 ] now mother
+ *    [ 1 | 3 | 1 | 19900101 |        0 ] stays father
+ */
+
+CREATE TABLE human_relations (
+	human_relation_id          SERIAL NOT NULL,
+	human_relation_description VARCHAR(250) NOT NULL,
+	PRIMARY KEY (human_relation_id)
+);
+
+INSERT INTO human_relations VALUES
+   (0, 'Onbekend'),
+   (1, 'Biologische Vader'),
+   (2, 'Biologische Moeder'),
+   (3, 'Adoptie Vader'),
+   (4, 'Adoptie Moeder'),
+   (5, 'Geregistreerd Partnerschap'),
+   (6, 'Gehuwd');
+
+CREATE TABLE humans_relations (
+	human_id_1           BIGINT NOT NULL,
+	human_id_2           BIGINT NOT NULL,
+	human_relation_id    INT NOT NULL COMMENT 'The relation of #1 to #2, like #1 is the father of #2',
+	human_relation_start INT NOT NULL COMMENT 'Ymd',
+	human_relation_end   INT NOT NULL DEFAULT 0 COMMENT 'Ymd or 0 when not set'
+);
